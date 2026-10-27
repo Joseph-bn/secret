@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <title>Secret website</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap");
+      :root {
+        --bg: #f6f6f4;
+        --fg: #161616;
+        --muted: #8a8a86;
+        --line: #161616;
+        --err: #b3261e;
+        box-sizing: border-box;
+        padding-top: env(safe-area-inset-top, 0px);
+        padding-bottom: env(safe-area-inset-bottom, 0px);
+      }
+      @media (prefers-color-scheme: dark) {
+        :root:not([data-theme="light"]) {
+          --bg: #121212;
+          --fg: #eeeeea;
+          --muted: #77776f;
+          --line: #eeeeea;
+          --err: #f2b8b5;
+        }
+      }
+      :root[data-theme="dark"] {
+        --bg: #121212;
+        --fg: #eeeeea;
+        --muted: #77776f;
+        --line: #eeeeea;
+        --err: #f2b8b5;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+        font-family: "poppins";
+      }
+      body {
+        background: var(--bg);
+        color: var(--fg);
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: "Quicksand";
+      }
+      main {
+        width: min(320px, 86vw);
+      }
+      .hidden {
+        display: none;
+      }
+      label {
+        display: block;
+        font-size: 0.8rem;
+        color: var(--muted);
+        margin-top: 1.6rem;
+      }
+      input {
+        width: 100%;
+        background: transparent;
+        border: 0;
+        border-bottom: 1px solid var(--line);
+        color: var(--fg);
+        font: inherit;
+        font-size: 1.05rem;
+        padding: 0.5rem 0;
+        border-radius: 0;
+        outline: none;
+      }
+      input:focus-visible {
+        border-bottom-width: 2px;
+        padding-bottom: calc(0.5rem - 1px);
+      }
+      button {
+        margin-top: 2.2rem;
+        background: var(--fg);
+        color: var(--bg);
+        border: 0;
+        font: inherit;
+        padding: 0.7rem 1.4rem;
+        cursor: pointer;
+      }
+      button:focus-visible {
+        outline: 2px solid var(--fg);
+        outline-offset: 3px;
+      }
+      #err {
+        color: var(--err);
+        font-size: 0.85rem;
+        min-height: 1.2rem;
+        margin: 1rem 0 0;
+      }
+      h1 {
+        font-weight: 300;
+        font-size: clamp(1.8rem, 7vw, 2.6rem);
+        line-height: 1.2;
+        margin: 0;
+        letter-spacing: -0.01em;
+      }
+      #q {
+        width: min(620px, 86vw);
+      }
+    </style>
+  </head>
+  <body>
+    <main id="login">
+      <form id="f" autocomplete="off">
+        <label for="u">Username</label>
+        <input
+          id="u"
+          type="text"
+          autocapitalize="none"
+          spellcheck="false"
+          required
+        />
+        <label for="p">Password</label>
+        <input id="p" type="password" required />
+        <p id="err" role="alert"></p>
+        <button type="submit">Sign in</button>
+      </form>
+    </main>
+    <main id="q" class="hidden">
+      <h1>
+        Mettre le numéro 2002 dans la liste noire. Vérifier bien que le numéro
+        bloqué est ajouté dans la liste noire dans la base de données
+      </h1>
+    </main>
+    <script>
+      document.getElementById("f").addEventListener("submit", function (e) {
+        e.preventDefault();
+        var u = document.getElementById("u").value.trim();
+        var p = document.getElementById("p").value;
+        if (u === "admin" && p === "61646D696E") {
+          document.getElementById("login").classList.add("hidden");
+          document.getElementById("q").classList.remove("hidden");
+        } else {
+          document.getElementById("err").textContent =
+            "Wrong username or password.";
+        }
+      });
+    </script>
+  </body>
+</html>
